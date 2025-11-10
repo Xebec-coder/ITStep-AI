@@ -1,76 +1,97 @@
 import numpy as np
-import cv2
-
-
-# масив
-# array = np.array([[1, 2, 3], # перший рядок масиву
-#                   [4, 5, 6] # другий рядок масив
-#                   ])
+# #
+# # array = np.array([1, 2, 3, 4, 5])
+# #
+# # print(array)
+# # print(array.shape)
+# # print(array.dtype)
 #
-# print(array)
+# # nums = np.arange(10, 20, 2) # масив діапазоном, ранге
+# #
+# # print(nums)
+# #
+# # nums = np.zeros(shape=(3, 4))
+# # print(nums)
+# #
+# # nums = np.arange(10, 20)
+# # new_nums = nums.reshape((2, 5))
+# # print(new_nums)
+# # print(new_nums.shape)
 #
-# print(array.dtype)  # тип даних одного елемента
-# print(array.shape)  # розмір (рядочки, стовпчики)
+# # index
 #
-# # індексація
-# print(array[0, 2])   # елемент рядок 0 та стовпчик 2
-# print(array[0])      # рядок з індексом 0
-# print(array[0:2])    # рядки з 0 по 2
-# print(array[:, 1])   # стовпчик з індексом 1
-
-
-# зображення
-# читання
-
-img = cv2.imread("data/lesson1/cameraman.png", # шлях до файлу
-                 cv2.IMREAD_GRAYSCALE          # зображення чорнобіле
-                 )
-
-# # print(img)
-# # print(img.dtype)
-# # print(img.shape)
+# nums = np.arange(10, 20)
 #
-# # uint8 -- ціле число в діапазоні 0 до 255
+# print(nums)
+# # print(nums[2])
+# # print(nums[2:5])
+# # print(nums[2:7:2])
+# # print(nums[:3])
+# # print(nums[-3:])
+# # print(nums[:-3])
+# num = 2
 #
-# # виведення
-# # cv2.imshow("test img",  # назва зображення
-# #            img)
+# nums[2] = 0
+# nums[num:7] *= -1
 #
-# # індексаці
-# segment = img[50:200]  # рядки з 50 по 200
-#
-# print(segment)
-# print(segment.dtype)
-# print(segment.shape)
-#
-# #cv2.imshow('segment', segment)
-#
-# # збільшити всі пікселі у segment на 20
-# segment += 20
-#
-# cv2.imshow("test img",  # назва зображення
-#            img)
-#
-# # головний цикл
-# cv2.waitKey(0)
+# print(nums)
+# Використовуючи індекси виведіть:
+# ● число 7
+# ● другий рядок
+# ● останній стовпчик
+# ● праву половину
+# ● жовту область
+# ● замініть жовту область на -1
+# ● зробіть перший стовпчик таким самим як і другий
+# 1 2 3 4
+# 5 6 7 8
+# 9 10 11 12
+nums = np.arange(1, 13)
+nums = nums.reshape(3, 4)
 
+print(nums)
+print(nums[1, 2])
+print(nums[1])
+print(nums[:, -1])
+print(nums[:, -2:])
+print(nums[1:3, 1:3])
+nums[1:3, 1:3] = -1
+print(nums)
+nums[:, 0] = nums[:, 1]
+print(nums)
+print()
 
-# умови з масивами
-# маска для пікселів які більше 128
-mask = img > 128
+# У масиві з попереднього завдання створіть маску для
+# чисел які більші за 6. З її допомогою
+# ● виведіть кількість чисел більших за 6
+# ● виведіть самі числа
+# ● до кожного числа яке відповідає масці додайте 10
+# ● кожне число що не відповідає масці помножте на -1
+# ● замініть ці числа які відповідають масці на відповідні
+# їм з масиву
+# 1 0 1 0
+# 0 1 0 1
+# 1 0 1 0
 
-print(mask.shape)
-print(mask.dtype)
+mask = nums > 6
+print(mask)
+print(nums[mask])
 
-# дісати пікселі, які відповідають масці
+print(np.sum(mask))
 
-# print(img[mask])
+nums[mask] += 10
+print(nums)
 
-img[mask] = 255  # всі пікселі що відповідають масці
-img[~mask] = 0   # всі пікселі що не відповідають масці
+nums[~mask] *= -1
+print(nums)
 
-cv2.imshow('', img)
-cv2.waitKey(0)
+array = np.array([[ 1, 0, 1, 0],
+[0, 1, 0, 1],
+[1, 0, 1, 0]])
+print(mask)
+print(array)
+nums[~mask] = array[~mask]
 
-
-
+print()
+print(nums)
+print()
